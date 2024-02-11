@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.datasource.name }}-deployment
+spec:
+  replicas: {{ .Values.orchestrator.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.datasource.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.datasource.components }}
+    spec:
+      containers:
+        - name: {{ .Values.datasource.name }}
+          image: "{{ .Values.datasource.image }}:{{ .Values.datasource.version }}"
+          ports:
+            - containerPort: {{ .Values.datasource.port }}
+          resources:
+            limits: {{ .Values.datasource.limits | toYaml | nindent 14 }}
+          env:
+            {{- range .Values.datasource.envs }}
+              {{- $data := dict "name" $.Values.datasource.name "env" . }}
+              {{- include "env.template" $data | indent 12 }}
+              {{- end }}

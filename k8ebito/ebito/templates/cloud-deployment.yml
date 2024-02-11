@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.cloud.name }}-deployment
+spec:
+  replicas: {{ .Values.cloud.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.cloud.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.cloud.components }}
+    spec:
+      containers:
+        - name: {{ .Values.cloud.name }}
+          image: "{{ .Values.cloud.image }}:{{ .Values.cloud.version }}"
+          ports:
+            - containerPort: {{ .Values.cloud.port }}
+          resources:
+            limits: {{ .Values.cloud.limits | toYaml | nindent 14 }}
+          env:
+            {{- range .Values.cloud.envs }}
+              {{- $data := dict "name" $.Values.cloud.name "env" . }}
+              {{- include "env.template" $data | indent 12 }}
+              {{- end }}

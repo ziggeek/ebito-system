@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.dataaggregator.name }}-deployment
+spec:
+  replicas: {{ .Values.dataaggregator.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.dataaggregator.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.dataaggregator.components }}
+    spec:
+      containers:
+        - name: {{ .Values.dataaggregator.name }}
+          image: "{{ .Values.dataaggregator.image }}:{{ .Values.dataaggregator.version }}"
+          ports:
+            - containerPort: {{ .Values.dataaggregator.port }}
+          resources:
+            limits: {{ .Values.dataaggregator.limits | toYaml | nindent 14 }}
+          env:
+            {{- range .Values.dataaggregator.envs }}
+              {{- $data := dict "name" $.Values.dataaggregator.name "env" . }}
+              {{- include "env.template" $data | indent 12 }}
+              {{- end }}

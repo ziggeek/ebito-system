@@ -1,0 +1,107 @@
+openapi: "3.0.3"
+info:
+  title: "Cloud API"
+  description: "Cloud API сервис для загрузки и получения документов. "
+  version: "1.0.0"
+tags:
+  - name: "Cloud"
+    description: "Cloud API сервис для загрузки и получения документов"
+paths:
+  /get-document-link/{name}:
+    get:
+      tags:
+        - "Cloud"
+      summary: "Получить ссылку на документ"
+      description: ""
+      operationId: "get-URL"
+      parameters:
+        - name: "name"
+          in: "path"
+          required: true
+          description: "Имя документа"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /{clientId}/get-client-references:
+    get:
+      tags:
+        - "Cloud"
+      summary: "Получить список ответов сгенерированной справки"
+      description: ""
+      operationId: "get-client-references"
+      parameters:
+        - name: "clientId"
+          in: "path"
+          required: true
+          description: "id клиента"
+          schema:
+            type: "string"
+        - name: "page"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "0"
+        - name: "size"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "10"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DocumentResponse"
+  /{clientId}/save-client-reference:
+    post:
+      tags:
+        - "Cloud"
+      summary: "Сохранить файл и отправить ответ сгенерированной справки"
+      description: ""
+      operationId: "save-client-reference"
+      parameters:
+        - name: "clientId"
+          in: "path"
+          required: true
+          description: "id клиента"
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: "object"
+              required:
+                - "file"
+              properties:
+                file:
+                  type: "string"
+                  format: "binary"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DocumentResponse"
+components:
+  schemas:
+    Resource:
+      type: "object"
+      properties: { }
+    DocumentResponse:
+      type: "object"
+      properties:
+        link:
+          type: "string"

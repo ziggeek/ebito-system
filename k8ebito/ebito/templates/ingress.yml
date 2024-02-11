@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ebitoingress
+  annotations:
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: parampam
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ .Values.orchestrator.name }}-clusterip
+                port:
+                  number: {{ .Values.orchestrator.port }}

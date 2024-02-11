@@ -1,0 +1,12 @@
+com\ebito\orchestrator\api\controller\response\PrintedGuids$PrintedGuidsBuilder.class
+com\ebito\orchestrator\client\cloud\CloudClient.class
+com\ebito\orchestrator\rabbitmq\RabbitMqListener.class
+com\ebito\orchestrator\api\OrchestratorApi.class
+com\ebito\orchestrator\rabbitmq\RabbitMqSender.class
+com\ebito\orchestrator\client\data_aggregator\DataAggregatorClient.class
+com\ebito\orchestrator\api\controller\request\PrintFormGenerationRequest.class
+com\ebito\orchestrator\api\controller\response\PrintedGuids.class
+com\ebito\orchestrator\api\controller\request\PrintFormGenerationRequest$PrintFormGenerationRequestBuilder.class
+com\ebito\orchestrator\config\RabbitMQConfig.class
+com\ebito\orchestrator\OrchestratorApplication.class
+com\ebito\orchestrator\api\controller\OrchestratorController.class

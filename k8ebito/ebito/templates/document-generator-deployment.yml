@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.documentgenerator.name }}-deployment
+spec:
+  replicas: {{ .Values.orchestrator.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.documentgenerator.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.documentgenerator.components }}
+    spec:
+      containers:
+        - name: {{ .Values.documentgenerator.name }}
+          image: "{{ .Values.documentgenerator.image }}:{{ .Values.documentgenerator.version }}"
+          ports:
+            - containerPort: {{ .Values.documentgenerator.port }}
+          resources:
+            limits: {{ .Values.documentgenerator.limits | toYaml | nindent 14 }}
+          env:
+            {{- range .Values.documentgenerator.envs }}
+              {{- $data := dict "name" $.Values.documentgenerator.name "env" . }}
+              {{- include "env.template" $data | indent 12 }}
+              {{- end }}

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.orchestrator.name }}-deployment
+spec:
+  replicas: {{ .Values.orchestrator.replicas }}
+  selector:
+    matchLabels:
+      components: {{ .Values.orchestrator.components }}
+  template:
+    metadata:
+      labels:
+        components: {{ .Values.orchestrator.components }}
+    spec:
+      containers:
+        - name: {{ .Values.orchestrator.name }}
+          image: "{{ .Values.orchestrator.image }}:{{ .Values.orchestrator.version }}"
+          ports:
+            - containerPort: {{ .Values.orchestrator.port }}
+          resources:
+            limits: {{ .Values.orchestrator.limits | toYaml | nindent 14 }}
+          env:
+            {{- range .Values.orchestrator.envs }}
+              {{- $data := dict "name" $.Values.orchestrator.name "env" . }}
+              {{- include "env.template" $data | indent 12 }}
+              {{- end }}

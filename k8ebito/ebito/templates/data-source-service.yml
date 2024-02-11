@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.datasource.name }}-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.datasource.port }}
+      protocol: TCP
+  selector:
+    components: {{ .Values.datasource.components }}

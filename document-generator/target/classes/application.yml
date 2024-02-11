@@ -1,0 +1,15 @@
+server:
+  port: 8083
+
+app:
+  feign:
+    client:
+      config:
+        cloud:
+          url: "http://ebito-cloud-clusterip:8084"
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+

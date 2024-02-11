@@ -1,0 +1,76 @@
+orchestrator:
+  name: ebito-orchestrator
+  image: user-name/ebito-orchestrator
+  version: v1.0
+  components: orchestrator
+  port: 8081
+  replicas: 1
+  limits:
+    memory: "250Mi"
+    cpu: "100m"
+
+documentgenerator:
+  name: ebito-document-generator
+  image: user-name/ebito-document-generator
+  version: v1.0
+  components: documentgenerator
+  port: 8083
+  replicas: 1
+  limits:
+    memory: "250Mi"
+    cpu: "100m"
+
+datasource:
+  name: ebito-data-source
+  image: user-name/ebito-data-source
+  version: v1.0
+  components: datasource
+  port: 8085
+  replicas: 1
+  limits:
+    memory: "250Mi"
+    cpu: "100m"
+
+dataaggregator:
+  name: ebito-data-aggregator
+  image: user-name/ebito-data-aggregator
+  version: v1.0
+  components: dataaggregator
+  port: 8082
+  replicas: 1
+  limits:
+    memory: "250Mi"
+    cpu: "100m"
+
+cloud:
+  name: ebito-cloud
+  image: user-name/ebito-cloud
+  version: v1.0
+  components: cloud
+  port: 8084
+  replicas: 1
+  dbname: ""
+  limits:
+    memory: "250Mi"
+    cpu: "100m"
+
+
+postgres:
+  name: postgres
+  image: postgres
+  version: 16.0
+  components: postgres
+  port: 5999
+  limits:
+    memory: "500Mi"
+    cpu: "250m"
+  envs:
+    - POSTGRES_DB
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
+
+
+database:
+  user: postgres
+  password: postgres
+  db: postgres

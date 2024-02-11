@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.ebito</groupId>
+    <artifactId>ebito</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>ebito</name>
+
+    <url>http://maven.apache.org</url>
+
+    <modules>
+        <module>orchestrator</module>
+        <module>data-aggregator</module>
+        <module>document-generator</module>
+        <module>cloud</module>
+        <module>common-lib</module>
+        <module>data-source</module>
+        <module>exception-handler</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+<!--        <maven-plugin.version>2.5.5</maven-plugin.version>-->
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+
+        <log4j.version>1.2.17</log4j.version>
+        <lombok.version>1.18.26</lombok.version>
+
+<!--        <common-lib.version>1.0.0</common-lib.version>-->
+<!--        <spring-cloud-openfeign.version>4.1.0</spring-cloud-openfeign.version>-->
+    </properties>
+
+<!--    <dependencyManagement>-->
+<!--        <dependencies>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--                <version>${spring-cloud-openfeign.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--        </dependencies>-->
+<!--    </dependencyManagement>-->
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,28 @@
+server:
+  port: 8082
+  error:
+    include-message: always
+
+app:
+  feign:
+    client:
+      config:
+        print:
+          url: http://localhost:8083
+        data-source:
+          url: http://localhost:8085
+  rabbitmq:
+    queue: ebito_data_aggregator_res_q
+    routingkey: ebito_data_aggregator_req_q
+    exchange: ebito_exchange
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  main:
+    allow-bean-definition-overriding: true
+
+

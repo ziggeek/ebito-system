@@ -1,0 +1,49 @@
+server:
+  port: 8084
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 15MB
+      max-request-size: 215MB
+  datasource:
+    driver-class-name: org.postgresql.Driver
+#    url: ${DB_URL}
+#    username: ${DB_USER}
+#    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5999/cloud
+    username: postgres
+    password: postgres
+    testWhileIdle: true
+    test-on-borrow: true
+    hikari:
+      maxLifetime: 60000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.format_sql: true
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+  liquibase:
+    change-log: db/changelog/changelog-master.yaml
+minio:
+# bucket: ${MINIO_BUCKET}
+# url: ${MINIO_URL}
+# accessKey: ${MINIO_ASSES_KEY}
+# secretKey: ${MINIO_SECRET_KEY}
+ bucket: documents
+ url: http://localhost:9000
+ accessKey: minioadmin
+ secretKey: minioadmin
+
+logging:
+  level:
+    dev.zig.controller.StudentController: DEBUG
+
