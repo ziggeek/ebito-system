@@ -17,6 +17,8 @@ app:
     exchange: ebito_exchange
 
 spring:
+  application:
+    name: data-aggregator
   rabbitmq:
     host: localhost
     port: 5672
@@ -24,5 +26,10 @@ spring:
     password: guest
   main:
     allow-bean-definition-overriding: true
+
+logging:
+  level:
+    com.ebito.data_aggregator.api.controller.DataAggregatorController: TRACE
+
 
 

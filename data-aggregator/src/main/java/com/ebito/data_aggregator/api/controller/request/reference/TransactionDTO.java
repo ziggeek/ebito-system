@@ -1,16 +1,13 @@
 package com.ebito.data_aggregator.api.controller.request.reference;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Builder
-@Getter
-@Setter
+@Data
 public class TransactionDTO {
 
     private String id;

@@ -27,4 +27,9 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+logging:
+  level:
+    com.ebito.data_aggregator.api.controller.DataAggregatorController: TRACE
+
+
 

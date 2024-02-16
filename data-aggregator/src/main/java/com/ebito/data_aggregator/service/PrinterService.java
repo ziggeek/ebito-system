@@ -30,6 +30,6 @@ public class PrinterService {
 
     private PrintedGuids sendRequest(PrintData printData) {
         log.info("*** Отправляем запрос в сервис печатных форм: {}", printData);
-        return printerClient.generatePrintForm( DocumentType.PDF, printData.getClientId(), printData).getBody();
+        return printerClient.generatePrintForm(DocumentType.PDF, printData.getClientId(), printData).getBody();
     }
 }
