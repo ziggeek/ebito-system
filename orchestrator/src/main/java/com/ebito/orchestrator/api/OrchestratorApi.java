@@ -3,22 +3,15 @@ package com.ebito.orchestrator.api;
 import com.ebito.exceptionhandler.model.ErrorResponse;
 import com.ebito.orchestrator.api.controller.request.PrintFormGenerationRequest;
 import com.ebito.orchestrator.api.controller.response.ClientDocuments;
-import com.ebito.orchestrator.api.controller.response.PrintedGuids;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 
 @Tag(name = "Orchestrator", description = "Orchestrator API")
@@ -82,6 +75,6 @@ public interface OrchestratorApi {
     })
     ResponseEntity<Void> generateDocument(
             @PathVariable("clientId") @Parameter(description = "Идентификатор  клиента") String clientId,
-            @RequestBody(description = "Код формируемого документа в запросе") PrintFormGenerationRequest request
+            @RequestBody @Parameter(description = "Код формируемого документа в запросе") PrintFormGenerationRequest request
     );
 }

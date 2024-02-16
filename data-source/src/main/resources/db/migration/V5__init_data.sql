@@ -9,7 +9,7 @@ VALUES ('John', 'Doe', 'Smith'),
 
 INSERT INTO t_accounts (t_client_id, t_account_number, t_account_currency)
 VALUES (1, 123456789, 'USD'),
-       (2, 987654321, 'EUR');
+       (2, 987654321, 'EURO');
 
 INSERT INTO t_agreements (t_agreement_number, t_agreement_date, t_client_id)
 VALUES (123, '2022-01-01', 1),
