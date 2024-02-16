@@ -11,8 +11,6 @@ spring:
     url: jdbc:postgresql://localhost:5999/data_source
     username: postgres
     password: postgres
-    testWhileIdle: true
-    test-on-borrow: true
     hikari:
       maxLifetime: 60000
   jpa:
@@ -29,13 +27,3 @@ spring:
     baseline-on-migrate: true
     enabled: true
     locations: classpath:db/migration
-
-logging:
-  level:
-    dev.zig.controller.StudentController: DEBUG
-
-feign:
-  client:
-    config:
-      print:
-        url: http://localhost:8089
