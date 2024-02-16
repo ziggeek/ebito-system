@@ -2,6 +2,8 @@ server:
   port: 8084
 
 spring:
+  application:
+    name: cloud
   config:
     import: optional:file:.env[.properties]
   servlet:
@@ -45,5 +47,4 @@ minio:
 
 logging:
   level:
-    dev.zig.controller.StudentController: DEBUG
-
+    com.ebito.cloud.api.controller.CloudController: TRACE
