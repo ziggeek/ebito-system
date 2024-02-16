@@ -69,7 +69,7 @@ public class FormUtils {
         String filename = RandomStringUtils.randomAlphanumeric(12);
         Date date = new Date();
         String prefix = formatter.format(date);
-        String extension = docType == null ? DocumentType.PDF.getDocumentExtension() : DocumentType.DOCX.getDocumentExtension();
+        String extension = docType == null ? DocumentType.PDF.getDocumentExtension() : docType.getDocumentExtension();
 
         return "created_" + prefix + "_" + filename + extension;
     }

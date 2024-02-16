@@ -40,7 +40,7 @@ public class FormGeneratorServiceImpl implements FormGeneratorService {
     private final FontProvider fontProvider;
     private final CloudClient cloudClient;
 
-    @Value("${app.stubs.isLocalStubEnabled:true}")
+    @Value("${app.stubs.isLocalStubEnabled:false}")
     private boolean isLocalStubEnabled;
 
     @SneakyThrows

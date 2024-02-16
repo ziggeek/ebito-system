@@ -9,7 +9,12 @@ app:
           url: "http://ebito-cloud-clusterip:8084"
 
 spring:
+  application:
+    name: document-generator
   main:
     allow-bean-definition-overriding: true
 
+logging:
+  level:
+    com.ebito.document_generator.api.controller.PrinterController: TRACE
 

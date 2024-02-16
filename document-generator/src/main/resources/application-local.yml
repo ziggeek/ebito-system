@@ -1,15 +1,14 @@
-server:
-  port: 8083
-
 app:
+  stubs:
+    isLocalStubEnabled: false
   feign:
     client:
       config:
         cloud:
           url: "http://localhost:8084"
 
-spring:
-  main:
-    allow-bean-definition-overriding: true
+logging:
+  level:
+    com.ebito.document_generator: DEBUG
 
 

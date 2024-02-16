@@ -42,7 +42,7 @@ public class DocumentMultipartFile implements MultipartFile {
         return bytes.length;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     @Override
     public byte[] getBytes() {
         return bytes;

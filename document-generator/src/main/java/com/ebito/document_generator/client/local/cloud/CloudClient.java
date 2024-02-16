@@ -2,6 +2,7 @@ package com.ebito.document_generator.client.local.cloud;
 
 import com.ebito.document_generator.client.local.cloud.response.DocumentResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +20,7 @@ public interface CloudClient {
      * @param document - файл сгенерированного документа
      * @return
      */
-    @PostMapping("/{clientId}/documents/save-client-document")
+    @PostMapping(value = "/{clientId}/documents/save-client-document", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<DocumentResponse> saveDocument(
             @PathVariable String clientId,
             @RequestParam(name = "checksum") String checksum,
