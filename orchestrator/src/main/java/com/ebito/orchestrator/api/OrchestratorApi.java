@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @Tag(name = "Orchestrator", description = "Orchestrator API")
 @RequestMapping("/api/v1")
@@ -75,6 +77,6 @@ public interface OrchestratorApi {
     })
     ResponseEntity<?> generateDocument(
             @PathVariable("clientId") @Parameter(description = "Идентификатор  клиента") String clientId,
-            @RequestBody @Parameter(description = "Код формируемого документа в запросе") PrintFormGenerationRequest request
+            @Valid @RequestBody @Parameter(description = "Код формируемого документа в запросе") PrintFormGenerationRequest request
     );
 }
