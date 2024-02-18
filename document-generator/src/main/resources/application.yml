@@ -13,4 +13,26 @@ spring:
     name: document-generator
   main:
     allow-bean-definition-overriding: true
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:9595
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+  security:
+    user:
+      name: clientGenerator
+      password: clientGenerator
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -25,6 +25,7 @@
         <module>common-lib</module>
         <module>data-source</module>
         <module>exception-handler</module>
+        <module>admin-server</module>
     </modules>
 
     <properties>

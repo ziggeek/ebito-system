@@ -4,6 +4,21 @@ server:
 spring:
   application:
     name: cloud
+  boot:
+    admin:
+      client:
+        url: http://localhost:9595
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+  security:
+    user:
+      name: clientCloud
+      password: clientCloud
   config:
     import: optional:file:.env[.properties]
   servlet:
@@ -35,6 +50,14 @@ spring:
         enable_lazy_load_no_trans: true
   liquibase:
     change-log: db/changelog/changelog-master.yaml
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 minio:
 # bucket: ${MINIO_BUCKET}
 # url: ${MINIO_URL}
