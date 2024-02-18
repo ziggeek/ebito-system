@@ -30,13 +30,24 @@ public class OrchestratorController implements OrchestratorApi {
         return ResponseEntity.ok().body(response);
     }
 
+    //посмотри такой вариант
     @Override
-    public ResponseEntity<Void> generateDocument(final String clientId, final PrintFormGenerationRequest request) {
+    public ResponseEntity<?> generateDocument(final String clientId, final PrintFormGenerationRequest request) {
         if (isAsyncConnectEnabled) {
             rabbitMqSender.send(request);
+            return ResponseEntity.ok().build();
         } else {
-            dataAggregatorClient.generateReference(clientId, request).getBody();
+            return dataAggregatorClient.generateReference(clientId, request);
         }
-        return ResponseEntity.ok().build();
     }
+
+//    @Override
+//    public ResponseEntity<Void> generateDocument(final String clientId, final PrintFormGenerationRequest request) {
+//        if (isAsyncConnectEnabled) {
+//            rabbitMqSender.send(request);
+//        } else {
+//            dataAggregatorClient.generateReference(clientId, request).getBody();
+//        }
+//        return ResponseEntity.ok().build();
+//    }
 }

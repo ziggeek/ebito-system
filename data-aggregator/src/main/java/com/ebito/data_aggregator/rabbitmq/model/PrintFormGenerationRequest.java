@@ -12,33 +12,35 @@ import java.time.LocalDate;
 /**
  * Запрос для генерации новой справки
  */
-@Value
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class PrintFormGenerationRequest {
 
     @Schema(description = "Код документа",
             example = "reference001")
     @NotNull(message = "Document code must not be null")
-    String documentCode;
+    private String documentCode;
 
     @Schema(description = "Идентификатор клиента",
             example = "1")
     @NotNull(message = "Client id must not be null")
-    String clientId;
+    private String clientId;
 
     @Schema(description = "Канал запроса на генерацию документа")
     @NotNull(message = "Channel must not be null")
-    Channel channel;
+    private Channel channel;
 
     @Schema(description = "Дата C",
             example = "2000-03-15")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = "Date from must not be null")
-    LocalDate dateFrom;
+    private LocalDate dateFrom;
 
     @Schema(description = "Дата ДО",
             example = "2024-03-15")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = "Date to must not be null")
-    LocalDate dateTo;
+    private LocalDate dateTo;
 }
