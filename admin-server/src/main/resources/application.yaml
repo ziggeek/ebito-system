@@ -11,13 +11,13 @@ spring:
     admin:
       client:
         url: http://localhost:9595
-        username: ${spring.security.user.name}
-        password: ${spring.security.user.password}
-      instance:
-        metadata:
-          user:
-            name: ${spring.security.user.name}
-            password: ${spring.security.user.password}
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
 management:
   endpoints:
     web:
