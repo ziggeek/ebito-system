@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
+
 import static com.ebito.orchestrator.api.controller.Endpoints.CONTEXT_PATH;
 import static com.ebito.orchestrator.api.controller.Endpoints.PrinterController.GENERATE_DOCUMENT;
 import static io.restassured.RestAssured.given;
@@ -31,17 +33,16 @@ public class OrchestratorDataAggregatorClientApiTest extends AbstractApiTest {
     private DataAggregatorClient dataAggregatorClient;
     String clientId = "1";
 
-    PrintedGuids printedGuids = PrintedGuids.builder()
-            .name("Выписка по начислениям абонента")
-            .pdfFileName("001_created_01_01_1970_08_40_12.pdf")
-            .link("https://rtkit.minio.ru/documents/somedocument.pdf")
-            .checkSum("7596c9e5bcb5dca0a6ea8a0704ad79ded2888950cfd077e2ff0d4962291acfc9")
-            .build();
-    PrintFormGenerationRequest printFormGenerationRequest = PrintFormGenerationRequest.builder()
-            .documentCode("reference001")
-            .channel(Channel.ONLINE)
-            .clientId("2")
-            .build();
+    PrintedGuids printedGuids = new PrintedGuids("https://rtkit.minio.ru/documents/somedocument.pdf",
+            "Выписка по начислениям абонента",
+            "7596c9e5bcb5dca0a6ea8a0704ad79ded2888950cfd077e2ff0d4962291acfc9",
+            "001_created_01_01_1970_08_40_12.pdf");
+    PrintFormGenerationRequest printFormGenerationRequest = new PrintFormGenerationRequest("reference001",
+            "2",
+            Channel.ONLINE,
+            LocalDate.now().minusDays(10),
+            LocalDate.now()
+    );
 
     @BeforeEach
     void setUp() {

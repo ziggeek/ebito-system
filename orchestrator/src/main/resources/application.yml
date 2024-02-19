@@ -10,10 +10,10 @@ app:
         data-aggregator:
           url: "http://ebito-data-aggregator-clusterip:8082"
   connections:
-    isAsyncConnectEnabled: false
+    isAsyncConnectEnabled: true
   rabbitmq:
-    queue: ebito_data_aggregator_req_q
-    routingkey: ebito_data_aggregator_res_q
+    queue: ebito_data_aggregator_res_q
+    routingkey: ebito_data_aggregator_req_q
     exchange: ebito_exchange
 
 spring:
