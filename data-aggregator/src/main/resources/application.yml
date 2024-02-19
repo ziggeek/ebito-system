@@ -32,8 +32,8 @@ spring:
               password: ${spring.security.user.password}
   security:
     user:
-      name: client_aggregator
-      password: client_aggregator
+      name: client
+      password: client
   rabbitmq:
     host: localhost
     port: 5672

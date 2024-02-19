@@ -39,8 +39,8 @@ spring:
               password: ${spring.security.user.password}
   security:
     user:
-      name: clientOrchestrator
-      password: clientOrchestrator
+      name: client
+      password: client
 management:
   endpoint:
     health:

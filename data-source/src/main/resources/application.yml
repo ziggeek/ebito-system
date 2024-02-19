@@ -40,8 +40,8 @@ spring:
               password: ${spring.security.user.password}
   security:
     user:
-      name: client_source
-      password: client_source
+      name: client
+      password: client
 management:
   endpoint:
     health:

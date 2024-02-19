@@ -17,8 +17,8 @@ spring:
               password: ${spring.security.user.password}
   security:
     user:
-      name: clientCloud
-      password: clientCloud
+      name: client
+      password: client
   config:
     import: optional:file:.env[.properties]
   servlet:

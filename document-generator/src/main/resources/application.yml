@@ -26,8 +26,8 @@ spring:
               password: ${spring.security.user.password}
   security:
     user:
-      name: clientGenerator
-      password: clientGenerator
+      name: client
+      password: client
 management:
   endpoint:
     health:
