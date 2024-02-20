@@ -50,3 +50,10 @@ management:
     web:
       exposure:
         include: "*"
+logging:
+  file:
+    name: admin-server/src/main/resources/log/data-source_api.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

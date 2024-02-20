@@ -52,6 +52,12 @@ management:
 logging:
   level:
     com.ebito.data_aggregator.api.controller.DataAggregatorController: TRACE
+  file:
+    name: admin-server/src/main/resources/log/data-aggregator_api.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
 
 
 

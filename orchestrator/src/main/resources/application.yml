@@ -10,7 +10,7 @@ app:
         data-aggregator:
           url: "http://ebito-data-aggregator-clusterip:8082"
   connections:
-    isAsyncConnectEnabled: false
+    isAsyncConnectEnabled: true
   rabbitmq:
     queue: ebito_data_aggregator_req_q
     routingkey: ebito_data_aggregator_res_q
@@ -49,3 +49,10 @@ management:
     web:
       exposure:
         include: "*"
+logging:
+  file:
+    name: admin-server/src/main/resources/log/orchestrator_api.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

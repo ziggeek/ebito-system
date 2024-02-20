@@ -58,6 +58,16 @@ management:
     web:
       exposure:
         include: "*"
+  info:
+    env:
+      enabled: true
+logging:
+  file:
+    name: admin-server/src/main/resources/log/cloud_api.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
 minio:
 # bucket: ${MINIO_BUCKET}
 # url: ${MINIO_URL}
