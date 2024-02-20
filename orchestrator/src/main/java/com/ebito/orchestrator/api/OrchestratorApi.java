@@ -75,7 +75,7 @@ public interface OrchestratorApi {
                             schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ResponseEntity<?> generateDocument(
+    ResponseEntity<Void> generateDocument(
             @PathVariable("clientId") @Parameter(description = "Идентификатор  клиента") String clientId,
             @Valid @RequestBody @Parameter(description = "Код формируемого документа в запросе") PrintFormGenerationRequest request
     );
