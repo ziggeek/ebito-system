@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class PrintFormGenerationRequest {
 
     @Schema(description = "Код документа",

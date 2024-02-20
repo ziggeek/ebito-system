@@ -11,14 +11,13 @@ import com.ebito.data_aggregator.mapper.TransactionMapper;
 import com.ebito.data_aggregator.api.controller.request.reference.TransactionDTO;
 import com.ebito.data_aggregator.rabbitmq.model.PrintFormGenerationRequest;
 import com.ebito.exceptionhandler.exception.IncorrectDocumentTypeException;
+import com.ebito.exceptionhandler.exception.ResourceNotFoundException;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +40,7 @@ public class CommonService {
             dogClass = getDogClass(request);
         } catch (IncorrectDocumentTypeException e) {
             log.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new ResourceNotFoundException(e.getMessage());
         }
         PrintData printData = this.buildPrintData(request);
         PrintedGuids printedGuids = ((Reference000Service) context.getBean(dogClass)).execute(printData);
@@ -69,12 +68,12 @@ public class CommonService {
 
         if (Objects.equals("reference001", request.getDocumentCode())) {
 
-            DataResponse data = null;
+            DataResponse data;
             try {
                 data = dataSourceClient.getData(request.getClientId()).getBody();
             } catch (FeignException ex) {
                 if (ex.status() == 404) {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Client with id=%s not found", request.getClientId()));
+                    throw new ResourceNotFoundException(String.format("Client with id=%s not found", request.getClientId()));
                 } else {
                     throw ex;
                 }
