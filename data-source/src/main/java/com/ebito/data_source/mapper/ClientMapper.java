@@ -11,6 +11,11 @@ public interface ClientMapper {
 
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
+    /**
+     * Маппинг Client в DataResponse
+     * @return объект DataResponse
+     */
+
     @Mapping(target = "clientId", source = "client.id")
     @Mapping(target = "accountNumber", source = "client.account.accountNumber")
     @Mapping(target = "accountCurrency", source = "client.account.accountCurrency")

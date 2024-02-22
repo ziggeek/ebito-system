@@ -7,6 +7,10 @@ import lombok.Value;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * Транзакция клиента
+ */
 @Value
 @Builder
 public class OperationDto {

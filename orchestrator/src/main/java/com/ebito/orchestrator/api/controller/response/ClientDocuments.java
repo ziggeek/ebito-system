@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Список документов клиента
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

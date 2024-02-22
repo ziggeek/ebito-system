@@ -9,6 +9,9 @@ import lombok.Value;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Необходимые данные для формирования справки
+ */
 @Value
 @Builder
 public class DataResponse {
