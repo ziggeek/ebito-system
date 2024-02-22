@@ -6,6 +6,10 @@ import lombok.Value;
 
 import java.util.List;
 
+/**
+ * Список документов клиента
+ */
+
 @Value
 @Builder
 public class ListDocumentResponse {

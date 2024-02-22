@@ -59,7 +59,10 @@ public class DocumentServiceImpl implements DocumentService {
         }
 
     }
-
+    /**
+     * Метод проверки создан ли корзина MiniO для хранения файлов.
+     * Если нет, то создание корзины для хранения файлов.
+     */
     @SneakyThrows
     private void createBucket() {
         log.debug("Bucket {} created successfully", minioProperties.getBucket());
@@ -73,6 +76,12 @@ public class DocumentServiceImpl implements DocumentService {
         }
     }
 
+    /**
+     * Метод загрузки файла в корзину MiniO.
+     * @param inputStream файл для загрузки.
+     * @param fileName имя файла.
+     */
+
     @SneakyThrows
     private void saveDocument(final InputStream inputStream,
                               final String fileName) {
@@ -83,6 +92,12 @@ public class DocumentServiceImpl implements DocumentService {
                 .object(fileName)
                 .build());
     }
+
+    /**
+     * Загрузка файла с корзины MiniO.
+     * @param name имя файла.
+     * @return ссылка на файл.
+     */
 
     @SneakyThrows
     private String loadUrlDocument(final String name) {
