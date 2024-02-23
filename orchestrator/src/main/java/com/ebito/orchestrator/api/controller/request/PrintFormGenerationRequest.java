@@ -22,9 +22,7 @@ public class PrintFormGenerationRequest {
     @NotNull(message = "Document code must not be null")
     private String documentCode;
 
-    @Schema(description = "Идентификатор клиента",
-            example = "1")
-    @NotNull(message = "Client id must not be null")
+    @Schema(hidden = true)
     private String clientId;
 
     @Schema(description = "Канал запроса на генерацию документа")

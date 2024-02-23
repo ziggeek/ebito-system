@@ -24,9 +24,7 @@ public class PrintFormGenerationRequest {
     @NotNull(message = "Document code must not be null")
     private String documentCode;
 
-    @Schema(description = "Идентификатор клиента",
-            example = "1")
-    @NotNull(message = "Client id must not be null")
+    @Schema(hidden = true)
     private String clientId;
 
     @Schema(description = "Канал запроса на генерацию документа")
@@ -44,4 +42,11 @@ public class PrintFormGenerationRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = "Date to must not be null")
     private LocalDate dateTo;
+
+    public PrintFormGenerationRequest(String documentCode, Channel channel, LocalDate dateFrom, LocalDate dateTo) {
+        this.documentCode = documentCode;
+        this.channel = channel;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+    }
 }

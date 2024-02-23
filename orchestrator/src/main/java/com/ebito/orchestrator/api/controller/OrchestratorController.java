@@ -32,6 +32,7 @@ public class OrchestratorController implements OrchestratorApi {
 
     @Override
     public ResponseEntity<Void> generateDocument(final String clientId, final PrintFormGenerationRequest request) {
+        request.setClientId(clientId);
         if (isAsyncConnectEnabled) {
             rabbitMqSender.send(request);
         } else {
