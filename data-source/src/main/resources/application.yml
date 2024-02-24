@@ -8,7 +8,7 @@ spring:
     name: data-source
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5999/data_source
+    url: jdbc:postgresql://postgres:5432/data_source
     username: postgres
     password: postgres
     hikari:

@@ -63,7 +63,7 @@ public class DataServiceTest {
                         .build())
                 .build();
 
-        when(clientRepository.findById(clientId)).thenReturn(Optional.of(client));
+        when(clientRepository.findById(Long.valueOf(clientId))).thenReturn(Optional.of(client));
 
         DataResponse dataResponse = dataService.getData(clientId);
 
