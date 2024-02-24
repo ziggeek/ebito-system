@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "6e8fd0a1-34df-4e68-a042-5794792784e2",
+		"name": "RTK IT — Ebito Systems",
+		"description": "Эта коллекция содержит запросы, охватывающие все эндпоинты для каждого микросервиса в проекте [Ebito System](https://github.com/ziggeek/ebito-system).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24570126"
+	},
+	"item": [
+		{
+			"name": "orchestrator",
+			"item": [
+				{
+					"name": "Generate Document",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"documentCode\": \"reference001\",\r\n  \"channel\": \"ONLINE\",\r\n  \"dateFrom\": \"2000-03-15\",\r\n  \"dateTo\": \"2024-03-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orchestrator-url}}/api/v1/clients/{{clientId}}/generate-document",
+							"host": [
+								"{{orchestrator-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"{{clientId}}",
+								"generate-document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get client documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orchestrator-url}}/api/v1/{{clientId}}/get-client-documents",
+							"host": [
+								"{{orchestrator-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"{{clientId}}",
+								"get-client-documents"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы к сервису orchestrator"
+		},
+		{
+			"name": "data-aggregator",
+			"item": [
+				{
+					"name": "Generate print form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"documentCode\": \"reference001\",\r\n  \"channel\": \"ONLINE\",\r\n  \"dateFrom\": \"2000-03-15\",\r\n  \"dateTo\": \"2024-03-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data-aggregator-url}}/api/v1/clients/{{clientId}}/generate-print-form",
+							"host": [
+								"{{data-aggregator-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"{{clientId}}",
+								"generate-print-form"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы к сервису data-aggregator"
+		},
+		{
+			"name": "document-generator",
+			"item": [
+				{
+					"name": "Generate print form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"form\": \"reference001\",\r\n  \"dateFrom\": \"2021-03-15\",\r\n  \"dateTo\": \"2023-03-15\",\r\n  \"lastName\": \"Ivanov\",\r\n  \"firstName\": \"Ivan\",\r\n  \"middleName\": \"Ivanovich\",\r\n  \"agreementNumber\": \"123456\",\r\n  \"dateSigningAgreement\": \"2010-03-15\",\r\n  \"accountNumber\": \"12345678901234567890\",\r\n  \"accountCurrency\": \"RUB\",\r\n  \"channel\": \"BRANCH\",\r\n  \"totalAmount\": \"1295.01\",\r\n  \"transactions\": [\r\n    {\r\n      \"id\": \"12345678\",\r\n      \"dateTime\": \"2021-03-15T12:30:00\",\r\n      \"paymentMethod\": \"СБП\",\r\n      \"sum\": \"1000.01\"\r\n    }\r\n  ],\r\n  \"clientFIO\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{document-generator-url}}/api/v1/forms/generate-print-form?clientId={{clientId}}&docType=PDF",
+							"host": [
+								"{{document-generator-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"forms",
+								"generate-print-form"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "{{clientId}}"
+								},
+								{
+									"key": "docType",
+									"value": "PDF"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы к сервису document-generator"
+		},
+		{
+			"name": "cloud",
+			"item": [
+				{
+					"name": "Save client document",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1eed32f9-bd95-47e0-b01a-267cdb010a04"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{cloud-url}}/api/v1/{{clientId}}/documents/save-client-document?clientId={{clientId}}&checksum=1b3c6f3894c9dbe05838e01ed314b0103f0941f2a7ec8b6bbae1b9ecff6d900b",
+							"host": [
+								"{{cloud-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"{{clientId}}",
+								"documents",
+								"save-client-document"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "{{clientId}}"
+								},
+								{
+									"key": "checksum",
+									"value": "1b3c6f3894c9dbe05838e01ed314b0103f0941f2a7ec8b6bbae1b9ecff6d900b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get client documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloud-url}}/api/v1/{{clientId}}/get-client-documents",
+							"host": [
+								"{{cloud-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"{{clientId}}",
+								"get-client-documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get document link",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloud-url}}/api/v1/get-document-link/created_24_02_2024_21_02_49_TlFzQtpCGurV.pdf",
+							"host": [
+								"{{cloud-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"get-document-link",
+								"created_24_02_2024_21_02_49_TlFzQtpCGurV.pdf"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы к сервису cloud"
+		},
+		{
+			"name": "data-source",
+			"item": [
+				{
+					"name": "Get data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data-source-url}}/api/v1/clients/{{clientId}}/get-data",
+							"host": [
+								"{{data-source-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"{{clientId}}",
+								"get-data"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы к сервису data-source"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "clientId",
+			"value": "1"
+		},
+		{
+			"key": "orchestrator-url",
+			"value": "http://localhost:8081"
+		},
+		{
+			"key": "data-aggregator-url",
+			"value": "http://localhost:8082",
+			"type": "string"
+		},
+		{
+			"key": "document-generator-url",
+			"value": "http://localhost:8083",
+			"type": "string"
+		},
+		{
+			"key": "cloud-url",
+			"value": "http://localhost:8084",
+			"type": "string"
+		},
+		{
+			"key": "data-source-url",
+			"value": "http://localhost:8085",
+			"type": "string"
+		}
+	]
+}
