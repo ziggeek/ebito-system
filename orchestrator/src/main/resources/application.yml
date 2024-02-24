@@ -6,9 +6,9 @@ app:
     client:
       config:
         cloud:
-          url: "http://ebito-cloud-clusterip:8084"
+          url: "http://cloud:8084"
         data-aggregator:
-          url: "http://ebito-data-aggregator-clusterip:8082"
+          url: "http://data-aggregator:8082"
   connections:
     isAsyncConnectEnabled: true
   rabbitmq:
@@ -20,7 +20,7 @@ spring:
   application:
     name: orchestrator
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
