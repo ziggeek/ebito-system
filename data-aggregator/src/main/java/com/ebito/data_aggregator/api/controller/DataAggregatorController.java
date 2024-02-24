@@ -19,6 +19,7 @@ public class DataAggregatorController implements DataAggregatorApi {
 
     @Override
     public ResponseEntity<PrintedGuids> generatePrintForm(final String clientId, final PrintFormGenerationRequest request) {
+        request.setClientId(clientId);
         final var response = commonService.selectPrintForm(request);
         return ResponseEntity.ok(response);
     }
