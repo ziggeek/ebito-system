@@ -4,9 +4,8 @@ import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.ebito.cloud.model.entity.DocumentEntity;
-import com.ebito.cloud.properties.MinioProperties;
+import com.ebito.cloud.properties.CloudProperties;
 import com.ebito.cloud.service.DocumentService;
 import com.ebito.exceptionhandler.exception.FileProcessingException;
 import com.ebito.exceptionhandler.exception.InvalidUrlException;
@@ -28,27 +27,22 @@ import java.net.URL;
 @Primary
 public class DocumentS3ServiceImpl implements DocumentService {
 
-    private final MinioProperties minioProperties;
-
+    private final CloudProperties cloudProperties;
     private final AmazonS3 amazonS3;
 
-
     @Override
-    public DocumentEntity upload(final MultipartFile file, final String clientId) {
-        InputStream inputStream;
-        try {
-            inputStream = file.getInputStream();
+    public DocumentEntity upload(MultipartFile file, String clientId) {
+        try (InputStream inputStream = file.getInputStream()) {
+            String fileName = file.getOriginalFilename();
+            saveDocument(inputStream, fileName);
+            return new DocumentEntity(clientId, fileName);
         } catch (Exception e) {
-            throw new FileProcessingException("Document upload failed: "
-                    + e.getMessage());
+            throw new FileProcessingException("Document upload failed: " + e.getMessage());
         }
-        saveDocument(inputStream, file.getOriginalFilename());
-        log.debug("Document file {} uploaded successfully", file.getOriginalFilename());
-        return new DocumentEntity(clientId, file.getOriginalFilename());
     }
 
     @Override
-    public String downloadUrl(final String name) {
+    public String downloadUrl(String name) {
         try {
             String url = loadUrlDocument(name);
             Assert.notNull(url, "Document url must not be null");
@@ -57,31 +51,19 @@ public class DocumentS3ServiceImpl implements DocumentService {
         } catch (Exception e) {
             throw new InvalidUrlException(e.getMessage());
         }
-
     }
 
-    /**
-     * Метод загрузки файла в корзину MiniO.
-     * @param inputStream файл для загрузки.
-     * @param fileName имя файла.
-     */
     @SneakyThrows
-    private void saveDocument(final InputStream inputStream, final String fileName) {
-        log.debug("Document file {} uploaded successfully", fileName);
+    private void saveDocument(InputStream inputStream, String fileName) {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(inputStream.available());
-        amazonS3.putObject(new PutObjectRequest(minioProperties.getBucket(), fileName, inputStream, metadata));
+        amazonS3.putObject(cloudProperties.getBucket(), fileName, inputStream, metadata);
+        log.debug("Document file {} uploaded successfully", fileName);
     }
 
-    /**
-     * Загрузка файла с корзины MiniO.
-     * @param name имя файла.
-     * @return ссылка на файл.
-     */
     @SneakyThrows
-    private String loadUrlDocument(final String name) {
-        log.debug("Document URL {} downloaded successfully", name);
-        GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(minioProperties.getBucket(), name)
+    private String loadUrlDocument(String name) {
+        GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(cloudProperties.getBucket(), name)
                 .withMethod(HttpMethod.GET)
                 .withExpiration(DateTime.now().plusMinutes(5).toDate());
         URL url = amazonS3.generatePresignedUrl(request);
@@ -89,3 +71,6 @@ public class DocumentS3ServiceImpl implements DocumentService {
     }
 
 }
+
+
+

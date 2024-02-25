@@ -75,7 +75,7 @@ services:
     hostname: postgres
     networks:
       - app-network
-    image: "postgres:16.1-alpine"
+    image: postgres:16.1-alpine
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"

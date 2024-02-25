@@ -1,7 +1,7 @@
 package com.ebito.cloud.service.Impl;
 
 import com.ebito.cloud.model.entity.DocumentEntity;
-import com.ebito.cloud.properties.MinioProperties;
+import com.ebito.cloud.properties.CloudProperties;
 import com.ebito.cloud.service.DocumentService;
 import com.ebito.exceptionhandler.exception.BucketProcessingException;
 import com.ebito.exceptionhandler.exception.FileProcessingException;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class DocumentServiceImpl implements DocumentService {
 
     private final MinioClient minioClient;
-    private final MinioProperties minioProperties;
+    private final CloudProperties cloudProperties;
 
     @Override
     public DocumentEntity upload(final MultipartFile file, final String clientId) {
@@ -65,13 +65,13 @@ public class DocumentServiceImpl implements DocumentService {
      */
     @SneakyThrows
     private void createBucket() {
-        log.debug("Bucket {} created successfully", minioProperties.getBucket());
+        log.debug("Bucket {} created successfully", cloudProperties.getBucket());
         boolean found = minioClient.bucketExists(BucketExistsArgs.builder()
-                .bucket(minioProperties.getBucket())
+                .bucket(cloudProperties.getBucket())
                 .build());
         if (!found) {
             minioClient.makeBucket(MakeBucketArgs.builder()
-                    .bucket(minioProperties.getBucket())
+                    .bucket(cloudProperties.getBucket())
                     .build());
         }
     }
@@ -88,7 +88,7 @@ public class DocumentServiceImpl implements DocumentService {
         log.debug("Document file {} uploaded successfully", fileName);
         minioClient.putObject(PutObjectArgs.builder()
                 .stream(inputStream, inputStream.available(), -1)
-                .bucket(minioProperties.getBucket())
+                .bucket(cloudProperties.getBucket())
                 .object(fileName)
                 .build());
     }
@@ -105,7 +105,7 @@ public class DocumentServiceImpl implements DocumentService {
         return minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
                         .method(Method.GET)
-                        .bucket(minioProperties.getBucket())
+                        .bucket(cloudProperties.getBucket())
                         .object(name)
                         .expiry(5, TimeUnit.MINUTES)
                         .build());
