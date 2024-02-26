@@ -1,0 +1,16 @@
+server:
+  port: 8083
+
+app:
+  feign:
+    client:
+      config:
+        cloud:
+          url: "http://158.160.147.236:8084"
+
+spring:
+  application:
+    name: document-generator
+  main:
+    allow-bean-definition-overriding: true
+

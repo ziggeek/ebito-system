@@ -6,4 +6,4 @@ COPY target/*exec.jar app.jar
 
 EXPOSE 8081
 
-CMD [ "java", "-jar", "/opt/app/app.jar" ]
+CMD [ "java", "-jar", "-Dspring.profiles.active=yacloud", "/opt/app/app.jar"]

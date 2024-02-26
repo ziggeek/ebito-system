@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebito-data-aggregator
+  labels:
+    app-label: ebito-data-aggregator
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-label: ebito-data-aggregator
+  template:
+    metadata:
+      labels:
+        app-label: ebito-data-aggregator
+    spec:
+      containers:
+      - name: ebito-data-aggregator
+        image: cr.yandex/crpsdee4cj9f5r7k87ic/ebito-data-aggregator:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"

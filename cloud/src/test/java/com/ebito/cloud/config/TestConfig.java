@@ -1,6 +1,6 @@
 package com.ebito.cloud.config;
 
-import com.ebito.cloud.properties.MinioProperties;
+import com.ebito.cloud.properties.CloudProperties;
 import com.ebito.cloud.service.DocumentService;
 import com.ebito.cloud.service.Impl.DocumentServiceImpl;
 import io.minio.MinioClient;
@@ -16,8 +16,8 @@ public class TestConfig {
 
 
     @Bean
-    public MinioProperties minioProperties() {
-        return new MinioProperties();
+    public CloudProperties minioProperties() {
+        return new CloudProperties();
     }
 
     @Bean
