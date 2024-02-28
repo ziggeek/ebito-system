@@ -75,14 +75,14 @@ services:
     hostname: postgres
     networks:
       - app-network
-    image: "postgres:16.1-alpine"
+    image: postgres:16.1-alpine
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "5999:5432"
 
   minio:
     image: minio/minio:latest
@@ -91,6 +91,7 @@ services:
       - app-network
     environment:
       - MINIO_ROOT_USER=${MINIO_ASSES_KEY}
+#      - MINIO_ROOT_URL=localhost:9000
       - MINIO_ROOT_PASSWORD=${MINIO_SECRET_KEY}
     command: server ~/minio --console-address :9090
     ports:

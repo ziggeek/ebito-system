@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebito-cloud
+  labels:
+    app-label: ebito-cloud
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-label: ebito-cloud
+  template:
+    metadata:
+      labels:
+        app-label: ebito-cloud
+    spec:
+      containers:
+      - name: ebito-cloud
+        image: cr.yandex/crpsdee4cj9f5r7k87ic/ebito-cloud:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"

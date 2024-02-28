@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "minio")
-public class MinioProperties {
+public class CloudProperties {
     private String bucket;
     private String url;
     private String accessKey;

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: ebito-document-generator
+  labels:
+    app-label: ebito-document-generator
+spec:
+  ports:
+    - port: 8083
+      name: plaintext
+      targetPort: 8083
+  selector:
+    app-label: ebito-document-generator
+  type: LoadBalancer

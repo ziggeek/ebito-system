@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: ebito-rabbitmq
+  labels:
+    app-label: ebito-rabbitmq
+spec:
+  ports:
+    - port: 5672
+      name: plaintext
+      targetPort: 5672
+    - port: 15672
+      name: plaintext2
+      targetPort: 15672
+  selector:
+    app-label: ebito-rabbitmq
+  type: LoadBalancer

@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+app:
+  feign:
+    client:
+      config:
+        cloud:
+          url: "http://158.160.147.236:8084"
+        data-aggregator:
+          url: "http://158.160.150.127:8082"
+  connections:
+    isAsyncConnectEnabled: true
+  rabbitmq:
+    queue: ebito_data_aggregator_res_q
+    routingkey: ebito_data_aggregator_req_q
+    exchange: ebito_exchange
+
+spring:
+  application:
+    name: orchestrator
+  rabbitmq:
+    host: 158.160.150.83
+    port: 5672
+    username: guest
+    password: guest
+  main:
+    allow-bean-definition-overriding: true

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebito-orchestrator
+  labels:
+    app-label: ebito-orchestrator
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-label: ebito-orchestrator
+  template:
+    metadata:
+      labels:
+        app-label: ebito-orchestrator
+    spec:
+      containers:
+      - name: ebito-orchestrator
+        image: cr.yandex/crpsdee4cj9f5r7k87ic/ebito-orchestrator:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"

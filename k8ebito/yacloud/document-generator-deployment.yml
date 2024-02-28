@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebito-document-generator
+  labels:
+    app-label: ebito-document-generator
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-label: ebito-document-generator
+  template:
+    metadata:
+      labels:
+        app-label: ebito-document-generator
+    spec:
+      containers:
+      - name: ebito-document-generator
+        image: cr.yandex/crpsdee4cj9f5r7k87ic/ebito-document-generator:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"

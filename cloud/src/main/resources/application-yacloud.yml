@@ -20,9 +20,9 @@ spring:
     #    url: ${DB_URL}
     #    username: ${DB_USER}
     #    password: ${DB_PASSWORD}
-    url: jdbc:postgresql://localhost:5999/cloud
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://rc1a-7hralt7zq1xy378o.mdb.yandexcloud.net:6432/ebito1
+    username: ebito
+    password: ebitoebito
     testWhileIdle: true
     test-on-borrow: true
     hikari:
@@ -44,7 +44,7 @@ minio:
   # url: ${MINIO_URL}
   # accessKey: ${MINIO_ASSES_KEY}
   # secretKey: ${MINIO_SECRET_KEY}
-  bucket: documents
-  url: http://localhost:9000
-  accessKey: minioadmin
-  secretKey: minioadmin
+  bucket: ritschool-storage-2
+  url: http://storage.yandexcloud.net
+  accessKey: YCAJEmDfIjvb4i1yyBA_-Phzu
+  secretKey: YCPgqjf5XryKfPsKbGdmrTqWKOoxppcPvNKP0AcI

@@ -3,7 +3,7 @@ package com.ebito.cloud.service.Impl;
 
 import com.ebito.cloud.config.TestConfig;
 import com.ebito.cloud.model.entity.DocumentEntity;
-import com.ebito.cloud.properties.MinioProperties;
+import com.ebito.cloud.properties.CloudProperties;
 import com.ebito.exceptionhandler.exception.BucketProcessingException;
 import com.ebito.exceptionhandler.exception.FileProcessingException;
 import io.minio.MinioClient;
@@ -33,7 +33,7 @@ class DocumentServiceImplTest {
 
 
     @MockBean
-    private MinioProperties minioProperties;
+    private CloudProperties cloudProperties;
     @MockBean
     public MinioClient minioClient;
     @Autowired
@@ -46,7 +46,7 @@ class DocumentServiceImplTest {
         String clientId = "123";
         String fileName = "test-file.pdf";
         MultipartFile file = new MockMultipartFile("file", fileName, "application/pdf", "test content".getBytes());
-        when(minioProperties.getBucket()).thenReturn("document");
+        when(cloudProperties.getBucket()).thenReturn("document");
         DocumentEntity result = documentService.upload(file, clientId);
 
         assertNotNull(result);
@@ -59,25 +59,25 @@ class DocumentServiceImplTest {
     public void testDownloadUrlSuccess() throws Exception {
         String expectedUrl = "https://example.com/document.pdf";
         when(minioClient.getPresignedObjectUrl(any())).thenReturn(expectedUrl);
-        when(minioProperties.getBucket()).thenReturn("document");
+        when(cloudProperties.getBucket()).thenReturn("document");
 
         String actualUrl = documentService.downloadUrl(("test-document"));
         assertNotNull(actualUrl);
         verify(minioClient).getPresignedObjectUrl(any());
-        verify(minioProperties).getBucket();
+        verify(cloudProperties).getBucket();
         assertEquals(expectedUrl, actualUrl);
     }
 
     @Test
     @DisplayName("Негативный тест для upload с некорректным bucket")
     void testUpload_invalidBucket() {
-        when(minioProperties.getBucket()).thenReturn(null);
+        when(cloudProperties.getBucket()).thenReturn(null);
 
         Exception exception = Assertions.assertThrows(BucketProcessingException.class, ()
                 -> documentService.upload(mock(MultipartFile.class), "123"));
 
         assertEquals("Bucket failed: bucket name must not be null.", exception.getMessage());
-        verify(minioProperties, times(2)).getBucket();
+        verify(cloudProperties, times(2)).getBucket();
     }
 
     @Test
