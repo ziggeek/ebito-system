@@ -37,6 +37,7 @@
 
         <poiVersion>4.0.1</poiVersion>
         <pdfConverterVersion>2.0.2</pdfConverterVersion>
+        <spring-boot-admin.version>2.7.5</spring-boot-admin.version>
 
         <common-lib.version>1.0.0</common-lib.version>
         <exception-handler.version>1.0.0</exception-handler.version>
@@ -67,6 +68,15 @@
             <version>${exception-handler.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>

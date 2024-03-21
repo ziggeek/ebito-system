@@ -27,3 +27,33 @@ spring:
     baseline-on-migrate: true
     enabled: true
     locations: classpath:db/migration
+  boot:
+    admin:
+      client:
+        url: http://localhost:9595
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+  security:
+    user:
+      name: client
+      password: client
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  file:
+    name: admin-server/src/main/resources/log/data-source_api.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

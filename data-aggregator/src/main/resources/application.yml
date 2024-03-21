@@ -19,6 +19,21 @@ app:
 spring:
   application:
     name: data-aggregator
+  boot:
+    admin:
+      client:
+        url: http://localhost:9595
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+  security:
+    user:
+      name: client
+      password: client
   rabbitmq:
     host: rabbitmq
     port: 5672
@@ -26,10 +41,23 @@ spring:
     password: guest
   main:
     allow-bean-definition-overriding: true
-
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 logging:
   level:
     com.ebito.data_aggregator.api.controller.DataAggregatorController: TRACE
+  file:
+    name: admin-server/src/main/resources/log/data-aggregator_api.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
 
 
 
